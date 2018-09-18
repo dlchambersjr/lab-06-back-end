@@ -20,7 +20,7 @@ This project uses the following technologies:
 * ```npm i superagent```
 * ```npm i dotenv```
 
-##Change Log
+## Change Log
 
 09-18-2018 10:00am - (DC/JE) Created initial scaffolding
 
