@@ -14,7 +14,7 @@ app.use(cors());
 
 require('dotenv').config();
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 app.get('/location', (request, response) => {
   console.log('request', request);
