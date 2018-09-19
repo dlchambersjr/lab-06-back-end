@@ -10,16 +10,17 @@ const app = express();
 
 app.use(cors());
 
-
-
 require('dotenv').config();
 
 const PORT = process.env.PORT;
 
-app.get('/location', (request, response) => {
-  console.log('request', request);
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${request.query.data}&key=${process.env.GOOGLE_API_KEY}`;
+app.get('/location', getGoogleLocation);
 
+
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+function getGoogleLocation(request, response) {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${request.query.data}&key=${process.env.GOOGLE_API_KEY}`;
   return superagent.get(url)
     .then(result => {
       const locationResult = {
@@ -30,6 +31,5 @@ app.get('/location', (request, response) => {
       }
       response.send(locationResult);
     })
-})
-
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+    .catch(error => console.log(`error message: ${error}`));
+}
